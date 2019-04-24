@@ -17,7 +17,7 @@ class _Main extends Component {
     return (
       <Switch>
         {
-          isLoggedIn && (<Route path='/home' component={UserPage} />)
+          isLoggedIn && ( <Route path='/home' component={UserPage} />)
         }
         {
           !isLoggedIn && (
