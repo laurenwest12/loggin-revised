@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import loggerMiddleware from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import axios from 'axios'
@@ -15,9 +15,9 @@ const setUser = (user) => {
 }
 
 //reducers
-const userReducer = (state = { }, action) => {
+const userReducer = (state = {}, action) => {
   switch (action.type) {
-    case SET_USER: 
+    case SET_USER:
       return action.user
     default:
       return state
@@ -38,13 +38,13 @@ export const loginThunk = (user) => {
   }
 }
 
-// export const sessionLogin = (user) => {
-//   return (dispatch) => {
-//     axios.get('/auth', user)
-//       .then(userResponse => dispatch(setUser(userResponse.data)))
-//       .catch((error) => console.log(error)) 
-//   }
-// }
+export const sessionLoginThunk = () => {
+  return (dispatch) => {
+    axios.get('/auth')
+      .then(userResponse => dispatch(setUser(userResponse.data)))
+      .catch((error) => console.log(error))
+  }
+}
 
 export const logoutThunk = () => {
   return (dispatch) => {

@@ -1,21 +1,26 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {logoutThunk} from './store'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { logoutThunk, sessionLoginThunk } from './store'
 
 class UserPage extends Component {
 
-  render () {
-  return (
-    <div className='h100 w100 flex column align-items-center justify-center'>
-      <div className='flex'>
-        <img className='rounded mr1' />
-        <h1>Welcome back, {this.props.user.email}!</h1>
+
+  componentDidMount() {
+    this.props.sessionLogin()
+  }
+
+  render() {
+    return (
+      <div className='h100 w100 flex column align-items-center justify-center'>
+        <div className='flex'>
+          <img className='rounded mr1' />
+          <h1>Welcome back, {this.props.user.email}!</h1>
+        </div>
+        <div>
+          <button className='btn bg-red white p1 rounded' onClick={this.props.logout}>Logout</button>
+        </div>
       </div>
-      <div>
-        <button className='btn bg-red white p1 rounded' onClick = {this.props.logout}>Logout</button>
-      </div>
-    </div>
-  )
+    )
 
   }
 }
@@ -28,7 +33,8 @@ const mapStateToProps = ({ user }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(logoutThunk())
+    logout: () => dispatch(logoutThunk()),
+    sessionLogin: () => dispatch(sessionLoginThunk())
   };
 }
 
